@@ -1,0 +1,6 @@
+query listProductListingContractsBySupplierID {
+    description: "Select all productlistings that came from a given supplier"
+    statement:
+        SELECT composer.food.supply.ProductListingContract
+            WHERE (_$supplierParam == supplier)
+}

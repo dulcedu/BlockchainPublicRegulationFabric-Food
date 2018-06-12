@@ -357,6 +357,52 @@ Open a web browser and navigate to http://localhost:3000/explorer
 
 You should see the LoopBack API Explorer, allowing you to inspect and test the generated REST API. Follow the instructions to test Business Network Definition as mentioned above in the composer section.
 
+## 6. Additional Exercises
+
+### Automate the generation of test data by writing a new transaction processor function
+
+One could think of a couple of ways to further extend / optimize the above scenario. For example the automation of generating additional test data.
+For this, a separate file `setup.js` has been added in the `lib` folder of this project. The model file `setupdemo.cto` contains the defintion of the transaction. It is now up to you to implement the transaction logic to populate the business network with the test data defined in `setup.js` :smiley:. The code snippet below shows the skeleton of the function.
+
+```
+// DEMO SETUP FUNCTIONS
+/**
+ * Create the participants & assets to use in the demo
+ * @param {composer.demosetup.food.supply.SetupDemo} setupDemo - the SetupDemo transaction
+ * @transaction
+ */
+async function setupDemo() {
+    console.log('running setupDemo()...');
+}
+```
+In order to have this function available in the business network, we need to create a new version of the Business Network Archive (BNA) file and deploy this to our underlying Hyperledger Fabric network. Follow the steps described in [Upgrading a deployed business network](#upgrading-a-deployed-business-network) to complete this. Once you've successfully upgraded the business network to include the `SetupDemo` transaction, abort any running composer REST server and re-run the `composer-rest-server` command. Next, open a web browser and navigate to http://localhost:3000/explorer. Execute the POST method (no parameters needed) for the `SetupDemo` transaction. The HTTP POST should return 200 OK.
+You should now have three suppliers, two importers, two retailers and a regulator in your test data. You can use the REST server or your local [Composer Playground](http://localhost:8080) to verify this.
+
+## Upgrading a deployed business network
+
+1. Make sure all updates are made to your business network (i.e. model updates, transaction logic updates, ACL updates. etc.)
+
+2. Update the version in the `package.json` file. This typically is the second entry in the JSON file.
+
+3. In the root of your project, run:
+  
+    ```
+    composer archive create -t dir -n . -a ./dist/food-supply.bna
+    ```
+
+4. Next, the new archive file can be installed to the blockchain network.
+
+    ```
+    composer network install -c PeerAdmin@hlfv1 -a ./dist/food-supply.bna
+    ```
+
+5. Finally, the existing business network can be upgraded to the new version by running.
+
+    ```
+    composer network upgrade -c PeerAdmin@hlfv1 -n food-supply -V <new-version-number>
+    ```
+
+Once this command successfully completes, your business network runs the new version.
 
 ## Additional Resources
 * [Hyperledger Fabric Docs](http://hyperledger-fabric.readthedocs.io/en/latest/)

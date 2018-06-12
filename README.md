@@ -363,8 +363,7 @@ You should see the LoopBack API Explorer, allowing you to inspect and test the g
 
 ### Automate the generation of test data by writing a new transaction processor function
 
-One could think of a couple of ways to further extend / optimize the above scenario. For example the automation of generating additional test data.
-For this, a separate file `setup.js` has been added in the `lib` folder of this project. The model file `setupdemo.cto` contains the defintion of the transaction. 
+One could think of a couple of ways to further extend / optimize the Food Supplier Verification Program use case. For example the automation of generating additional test data. For this, a separate file `setup.js` has been added in the `lib` folder of this project. The model file `setupdemo.cto` contains the defintion of the transaction. 
 
 **Excercise:** It is now up to you to implement the transaction logic to populate the business network with the test data defined in `setup.js` :smiley:. 
 
@@ -414,7 +413,7 @@ So far, the business network ran on a local Hyperledger Fabric blockchain. The o
 
 **Step 1. Deploy an instance of the IBM Blockchain service**
 
-* Use your IBM ID and password to log in to IBM Cloud. If you don't have one yet, open the [Sign Up for Bluemix]() page in a seperate tab. Fill in the form and click **Create Account** to complete the registration. You will receive an activation mail in your inbox.
+* Use your IBM ID and password to log in to IBM Cloud. If you don't have one yet, open the [Sign Up for Bluemix](https://ibm.biz/BdZC7C) page in a seperate tab. Fill in the form and click **Create Account** to complete the registration. You will receive an activation mail in your inbox.
 
 * Create the IBM Blockchain service by searching for blockchain in the catalog. Make sure the region to deploy the service to is US-South and that the selected plan is the 'Starter Plan'.
     > If you cannot select the US-South region, please follow [these instructions](https://console.bluemix.net/docs/account/orgs_spaces.html#spaceinfo) to create a new space in US-South region. Typically you name the space `dev` and select US-South as the region where the space should be created.

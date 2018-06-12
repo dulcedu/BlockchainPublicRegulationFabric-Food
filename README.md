@@ -199,7 +199,8 @@ In the `Supplier` participant registry, create a new participant. Make sure you 
 ![Create participant](images/createparticipant.png)
 
 Enter the following information to create the supplier.
-```
+
+```json
 {
   "$class": "composer.food.supply.Supplier",
   "supplierId": "supplierA",
@@ -209,7 +210,8 @@ Enter the following information to create the supplier.
 ```
 
 Similarly create `retailer`, `regulator` and `importer` participants by selecting the respective tabs and provide the information as follows:
-```
+
+```json
 {
   "$class": "composer.food.supply.Retailer",
   "retailerId": "retailerA",
@@ -217,7 +219,7 @@ Similarly create `retailer`, `regulator` and `importer` participants by selectin
 }
 ```
 
-```
+```json
 {
   "$class": "composer.food.supply.Regulator",
   "regulatorId": "regulatorA",
@@ -227,7 +229,7 @@ Similarly create `retailer`, `regulator` and `importer` participants by selectin
 }
 ```
 
-```
+```json
 {
   "$class": "composer.food.supply.Importer",
   "importerId": "importerA"
@@ -248,7 +250,7 @@ Repeat the above step to also create IDs for the importer, regulator and retaile
 
 Next, click on the `test tab` to perform `createProductListing` and `transferListing` transactions. Click the `Submit Transaction` button and select the `createProductListing` transaction from the dropdown to create a product listing for the list of products. The `products` array element contains information about the `productid` and `quantity` separated by `,`.
 
-```
+```json
 {
   "$class": "composer.food.supply.createProductListing",
   "listingtId": "pl1",
@@ -263,7 +265,7 @@ After executing the transaction successfully, a `productListing` will be created
 
 Similarly, submit a `transferListing` transaction to transfer the `productListing` to the `Importer`.
 
-```
+```json
 {
   "$class": "composer.food.supply.transferListing",
   "ownerType": "supplier",
@@ -284,7 +286,7 @@ Now `importerA` will be the owner of `ProductListingContract` and the status wil
 
 A successful execution of the transaction will change the status of `productListing` to `CHECKCOMPLETED`. Now perform a `transferListing` transaction to transfer the products to retailer.
 
-```
+```json
 {
   "$class": "composer.food.supply.transferListing",
   "ownerType": "importer",
@@ -362,9 +364,13 @@ You should see the LoopBack API Explorer, allowing you to inspect and test the g
 ### Automate the generation of test data by writing a new transaction processor function
 
 One could think of a couple of ways to further extend / optimize the above scenario. For example the automation of generating additional test data.
-For this, a separate file `setup.js` has been added in the `lib` folder of this project. The model file `setupdemo.cto` contains the defintion of the transaction. It is now up to you to implement the transaction logic to populate the business network with the test data defined in `setup.js` :smiley:. The code snippet below shows the skeleton of the function.
+For this, a separate file `setup.js` has been added in the `lib` folder of this project. The model file `setupdemo.cto` contains the defintion of the transaction. 
 
-```
+**Excercise:** It is now up to you to implement the transaction logic to populate the business network with the test data defined in `setup.js` :smiley:. 
+
+The code snippet below shows the skeleton of the function.
+
+```javascript
 // DEMO SETUP FUNCTIONS
 /**
  * Create the participants & assets to use in the demo
@@ -375,8 +381,51 @@ async function setupDemo() {
     console.log('running setupDemo()...');
 }
 ```
-In order to have this function available in the business network, we need to create a new version of the Business Network Archive (BNA) file and deploy this to our underlying Hyperledger Fabric network. Follow the steps described in [Upgrading a deployed business network](#upgrading-a-deployed-business-network) to complete this. Once you've successfully upgraded the business network to include the `SetupDemo` transaction, abort any running composer REST server and re-run the `composer-rest-server` command. Next, open a web browser and navigate to http://localhost:3000/explorer. Execute the POST method (no parameters needed) for the `SetupDemo` transaction. The HTTP POST should return 200 OK.
+
+In order to have this function available in the business network, we need to create a new version of the Business Network Archive (BNA) file and deploy this to our underlying Hyperledger Fabric network. Follow the steps described in [Upgrading a deployed business network](#upgrading-a-deployed-business-network) to complete this. 
+
+Once you've successfully upgraded the business network to include the `SetupDemo` transaction, abort any running composer REST server and re-run the `composer-rest-server` command. Next, open a web browser and navigate to http://localhost:3000/explorer. Execute the POST method (no parameters needed) for the `SetupDemo` transaction. The HTTP POST should return 200 OK.
+
+![SetupDemo](images/setupdemo.png)
+
 You should now have three suppliers, two importers, two retailers and a regulator in your test data. You can use the REST server or your local [Composer Playground](http://localhost:8080) to verify this.
+
+### Write a query to list all product listing contracts for a given supplier
+
+In this section we extend the use-case of this pattern by leveraging the query capabilities of Hyperledger Composer. Imagine the retailer needs to be able to provide a list of all the products that he received from a given supplier. For this, we write a named query that returns all product listing contracts for a given supplier ID.
+
+The Hyperledger Composer framework defines its queries in the file `queries.qry`, located in the root of the project folder. This file has already been created for you. 
+
+**Exercise:** Use the techniques explained in the [Hyperledger Composer Queries Tutorial](https://hyperledger.github.io/composer/latest/tutorials/queries) to define one query that returns the product listing contracts for a given supplier.
+
+Once completed, update the version number in the `package.json` file and follow the steps in [Upgrading a deployed business network](#upgrading-a-deployed-business-network) to update the business network. Finally, regenerate the REST server using the `composer-rest-server` command.
+
+```
+composer-rest-server -c retailer@food-supply -n never -w true
+```
+
+> In the above command `retailer@food-supply` represents the business card of the retailer. By using the retailer card, only that data is returned that the retailer is allowed to see according to the rules defined in the `permissions.acl` file.
+
+To properly test the query, run the `SetupDemo` transaction to generate additional test data. For this, use both `supplierA` and `supplierB` to create new product listing contracts and transfer these via the importers to `retailerA`.
+
+### Optional: deploy the business network archive file to the IBM Blockchain Starter plan on IBM Cloud
+
+So far, the business network ran on a local Hyperledger Fabric blockchain. The objective in this section is to deploy the Business Network Archive (BNA) file to a blockchain-as-a-service environment on IBM Cloud. 
+
+**Step 1. Deploy an instance of the IBM Blockchain service**
+
+* Use your IBM ID and password to log in to IBM Cloud. If you don't have one yet, open the [Sign Up for Bluemix]() page in a seperate tab. Fill in the form and click **Create Account** to complete the registration. You will receive an activation mail in your inbox.
+
+* Create the IBM Blockchain service by searching for blockchain in the catalog. Make sure the region to deploy the service to is US-South and that the selected plan is the 'Starter Plan'.
+    > If you cannot select the US-South region, please follow [these instructions](https://console.bluemix.net/docs/account/orgs_spaces.html#spaceinfo) to create a new space in US-South region. Typically you name the space `dev` and select US-South as the region where the space should be created.
+
+  Once the service is successfully created, click the **Enter Monitor** button to get to the overview page of your freshly deployed blockchain network.
+
+  ![IBMBlockchain](images/ibmblockchain.png)
+
+**Step 2. Deploy your business network to the blockchain starter plan**
+
+* Follow the steps in https://console.bluemix.net/docs/services/blockchain/develop_starter.html#deploying-a-business-network to deploy the food supply business network to the IBM Blockchain Starter Plan service. 
 
 ## Upgrading a deployed business network
 

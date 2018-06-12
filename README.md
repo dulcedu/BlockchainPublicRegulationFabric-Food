@@ -404,9 +404,9 @@ Once completed, update the version number in the `package.json` file and follow 
 composer-rest-server -c retailer@food-supply -n never -w true
 ```
 
-> In the above command `retailer@food-supply` represents the business card of the retailer. By using the retailer card, only that data is returned that the retailer is allowed to see according to the rules defined in the `permissions.acl` file.
+In the above command `retailer@food-supply` represents the business card of the retailer. By using the retailer card, only that data is returned that the retailer is allowed to see according to the rules defined in the `permissions.acl` file.
 
-To properly test the query, run the `SetupDemo` transaction to generate additional test data. For this, use both `supplierA` and `supplierB` to create new product listing contracts and transfer these via the importers to `retailerA`.
+To properly test the query, run the `SetupDemo` transaction to generate additional test data. For this, use both `supplierA` and `supplierB` to create new product listing contracts and transfer these to the retailer that corresponds with the business card used in the above command. Most likely this would be `retailerA`.
 
 ### Optional: deploy the business network archive file to the IBM Blockchain Starter plan on IBM Cloud
 

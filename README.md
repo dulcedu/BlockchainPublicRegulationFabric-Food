@@ -61,6 +61,7 @@ If you have an IBM cloud lite account, you can also use the Starter Plan for 30 
 3. [Generate the Business Network Archive (BNA)](#3-generate-the-business-network-archive-bna)
 4. [Deploy the Business Network Archive using Composer Playground](#4-deploy-the-business-network-archive-using-composer-playground)
 5. [Deploy the Business Network Archive on Hyperledger Composer running locally](#5-deploy-the-business-network-archive-on-hyperledger-composer-running-locally)
+6. [Additional Exercises](#6-additional-exercises)
 
 
 ## 1. Installing Hyperledger Composer Development Tools
@@ -390,7 +391,7 @@ Once you've successfully upgraded the business network to include the `SetupDemo
 ![SetupDemo](images/setupdemo.png)
 
 You should now have two additional suppliers, one additional importer and one additional retailer in your test data. You can use the REST server or your local [Composer Playground](http://localhost:8080) to verify this.
->If you executed everything in Step 4 in the online playground -- as intented -- you might want to redo these steps on your local network as well. This to get all business cards and test data generated there available to you in your local environment as well.
+>If you executed everything in [Step 4](#4-deploy-the-business-network-archive-using-composer-playground) in the online playground -- as intented -- you might want to redo these steps on your local network as well. This to get all business cards and test data generated there available to you in your local environment as well.
 
 ### Write a query to list all product listing contracts for a given supplier
 

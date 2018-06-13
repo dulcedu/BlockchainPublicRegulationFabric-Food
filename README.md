@@ -452,23 +452,23 @@ So far, the business network ran on a local Hyperledger Fabric blockchain. The o
     composer network upgrade -c PeerAdmin@hlfv1 -n food-supply -V <new-version-number>
     ```
 
-Once this command successfully completes, your business network runs the new version. You could verify this by running:
+6. Once this command successfully completes, your business network runs the new version. You could verify this by running:
 
-```
-composer network ping -c admin@food-supply
-```
+    ```
+    composer network ping -c admin@food-supply
+    ```
 
-which should list the business network version used, the composer runtime version, the participant and the identity.
+    which should list the business network version used, the composer runtime version, the participant and the identity.
 
-```
-The connection to the network was successfully tested: food-supply
-	Business network version: 0.0.1
-	Composer runtime version: 0.19.8
-	participant: org.hyperledger.composer.system.NetworkAdmin#admin
-	identity: org.hyperledger.composer.system.Identity#2c7907e454a0f4463a89d8318e32157695d1e6977865d735ab41c75d26791701
+    ```
+    The connection to the network was successfully tested: food-supply
+      Business network version: 0.0.1
+      Composer runtime version: 0.19.8
+      participant: org.hyperledger.composer.system.NetworkAdmin#admin
+      identity: org.hyperledger.composer.system.Identity#2c7907e454a0f4463a89d8318e32157695d1e6977865d735ab41c75d26791701
 
-Command succeeded
-```
+    Command succeeded
+    ```
 
 ## Additional Resources
 * [Hyperledger Fabric Docs](http://hyperledger-fabric.readthedocs.io/en/latest/)

@@ -176,7 +176,7 @@ You should see the following output :
 ## 4. Deploy the Business Network Archive using Composer Playground
 If you skipped steps 1 - 3 and you just want to explore this use case using the online Composer Playground, use Ctrl-click (or the equivalent action for your system) to open the <a href="https://ibm.box.com/v/food-supply" target=download>food-supply.bna</a> file in a separate tab. Click **Download** to download this file to your own device.
 
-Open the online [Composer Playground](http://composer-playground.mybluemix.net/). If you have previously used Playground, be sure to clear your browser local storage by running `localStorage.clear()` in your browser Console, or to use the option presented to you by Composer Playground.
+Open the online [Composer Playground](http://composer-playground.mybluemix.net/). If you have previously used the playground, be sure to clear your browser local storage by running `localStorage.clear()` in your browser Console, or to use the option presented to you by Composer Playground.
 
 Next, click the `Deploy a new business network` button.
 
@@ -432,7 +432,7 @@ So far, the business network ran on a local Hyperledger Fabric blockchain. The o
 
 1. Make sure all updates are made to your business network (i.e. model updates, transaction logic updates, ACL updates. etc.)
 
-2. Update the version in the `package.json` file. This typically is the second entry in the JSON file.
+2. Update the version number in the `package.json` file. This typically is the second entry in the JSON file.
 
 3. In the root of your project, run:
   
@@ -440,7 +440,7 @@ So far, the business network ran on a local Hyperledger Fabric blockchain. The o
     composer archive create -t dir -n . -a ./dist/food-supply.bna
     ```
 
-4. Next, the new archive file can be installed to the blockchain network.
+4. Next, the generated BNA file can be installed to the blockchain network.
 
     ```
     composer network install -c PeerAdmin@hlfv1 -a ./dist/food-supply.bna
@@ -452,7 +452,23 @@ So far, the business network ran on a local Hyperledger Fabric blockchain. The o
     composer network upgrade -c PeerAdmin@hlfv1 -n food-supply -V <new-version-number>
     ```
 
-Once this command successfully completes, your business network runs the new version.
+Once this command successfully completes, your business network runs the new version. You could verify this by running:
+
+```
+composer network ping -c admin@food-supply
+```
+
+which should list the business network version used, the composer runtime version, the participant and the identity.
+
+```
+The connection to the network was successfully tested: food-supply
+	Business network version: 0.0.1
+	Composer runtime version: 0.19.8
+	participant: org.hyperledger.composer.system.NetworkAdmin#admin
+	identity: org.hyperledger.composer.system.Identity#2c7907e454a0f4463a89d8318e32157695d1e6977865d735ab41c75d26791701
+
+Command succeeded
+```
 
 ## Additional Resources
 * [Hyperledger Fabric Docs](http://hyperledger-fabric.readthedocs.io/en/latest/)

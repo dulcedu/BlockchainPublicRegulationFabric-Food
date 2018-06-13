@@ -1,5 +1,10 @@
+/******************************************************************************* 
+* Create a query that returns all product listing contracts from a given supplier
+* The existing SELECT statement serves as an example and needs to be completely 
+* modified to query product listing contracts. 
+*******************************************************************************/
 query listProductListingContractsBySupplierID {
     description: "Select all productlistings that came from a given supplier"
     statement:
-        // Create a query that returns all product listing contracts from a given supplier
+        SELECT org.hyperledger.composer.system.HistorianRecord
 }

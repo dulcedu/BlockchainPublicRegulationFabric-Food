@@ -174,7 +174,7 @@ You should see the following output :
 ```
 
 ## 4. Deploy the Business Network Archive using Composer Playground
-If you skipped steps 1 - 3 and you just want to explore this use case using the online Composer Playground, use Ctrl-click (or the equivalent action for your system) to open the <a href="https://ibm.box.com/v/food-supply" target=download>food-supply.bna</a> file in a separate tab. Click **Download** to download this file to your own device.
+If you skipped the above Steps 1 - 3, and you just want to explore this use case using the online Composer Playground, use Ctrl-click (or the equivalent action for your system) to open the <a href="https://ibm.box.com/v/food-supply" target=download>food-supply.bna</a> file in a separate tab. Click **Download** to download this file to your own device.
 
 Open the online [Composer Playground](http://composer-playground.mybluemix.net/). If you have previously used the playground, be sure to clear your browser local storage by running `localStorage.clear()` in your browser Console, or to use the option presented to you by Composer Playground.
 
@@ -389,7 +389,8 @@ Once you've successfully upgraded the business network to include the `SetupDemo
 
 ![SetupDemo](images/setupdemo.png)
 
-You should now have three suppliers, two importers, two retailers and a regulator in your test data. You can use the REST server or your local [Composer Playground](http://localhost:8080) to verify this.
+You should now have two additional suppliers, one additional importer and one additional retailer in your test data. You can use the REST server or your local [Composer Playground](http://localhost:8080) to verify this.
+>If you executed everything in Step 4 in the online playground -- as intented -- you might want to redo these steps on your local network as well. This to get all business cards and test data generated there available to you in your local environment as well.
 
 ### Write a query to list all product listing contracts for a given supplier
 

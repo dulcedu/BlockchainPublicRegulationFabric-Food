@@ -391,7 +391,7 @@ Once you've successfully upgraded the business network to include the `SetupDemo
 ![SetupDemo](images/setupdemo.png)
 
 You should now have two additional suppliers, one additional importer and one additional retailer in your test data. You can use the REST server or your local [Composer Playground](http://localhost:8080) to verify this.
->If you executed everything in [Step 4](#4-deploy-the-business-network-archive-using-composer-playground) in the online playground -- as intented -- you might want to redo these steps on your local network as well. This to get all business cards and test data generated there available to you in your local environment as well.
+>If you executed everything in [Step 4](#4-deploy-the-business-network-archive-using-composer-playground) in the online playground -- as intented -- you might want to redo these steps in your [local Playground](http://localhost:8080) as well. This to make all business cards and test data generated there also locally available.
 
 ### Write a query to list all product listing contracts for a given supplier
 

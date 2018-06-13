@@ -174,13 +174,15 @@ You should see the following output :
 ```
 
 ## 4. Deploy the Business Network Archive using Composer Playground
-Open [Composer Playground](http://composer-playground.mybluemix.net/). If you have previously used Playground, be sure to clear your browser local storage by running `localStorage.clear()` in your browser Console, or to use the option presented to you by Composer Playground.
+If you skipped steps 1 - 3 and you just want to explore this use case using the online Composer Playground, use Ctrl-click (or the equivalent action for your system) to open the <a href="https://ibm.box.com/v/food-supply" target=download>food-supply.bna</a> file in a separate tab. Click **Download** to download this file to your own device.
+
+Open the online [Composer Playground](http://composer-playground.mybluemix.net/). If you have previously used Playground, be sure to clear your browser local storage by running `localStorage.clear()` in your browser Console, or to use the option presented to you by Composer Playground.
 
 Next, click the `Deploy a new business network` button.
 
 ![Deploy new network 1](images/deploy-new-network-1.png)
 
-and drop the `food-supply.bna` file (downloaded above) in the `Drop here to upload or browse` area.
+and drop the `food-supply.bna` file (downloaded or created above) in the `Drop here to upload or browse` area.
 
 ![Deploy new network 2](images/deploy-new-network-2.png)
 
@@ -276,7 +278,7 @@ Similarly, submit a `transferListing` transaction to transfer the `productListin
 
 Now `importerA` will be the owner of `ProductListingContract` and the status will be `EXEMPTCHECKREQ`. Also, the `productListing` will be removed from the `Supplier` view. Now select the `Importer  ID` from the `ID Registry` and submit a `checkProducts` transaction to perform the exempt check for the products.
 
-```
+```json
 {
   "$class": "composer.food.supply.checkProducts",
   "regulator": "resource:composer.food.supply.Regulator#regulatorA",
@@ -284,7 +286,7 @@ Now `importerA` will be the owner of `ProductListingContract` and the status wil
 }
 ```
 
-A successful execution of the transaction will change the status of `productListing` to `CHECKCOMPLETED`. Now perform a `transferListing` transaction to transfer the products to retailer.
+A successful execution of the transaction will change the status of `productListing` to `CHECKCOMPLETED`. Now perform a `transferListing` transaction to transfer the products to the retailer.
 
 ```json
 {
@@ -295,7 +297,7 @@ A successful execution of the transaction will change the status of `productList
 }
 ```
 
-The transaction will the change the owner of `ProductListingContract` and update the list of products in `Retailer` registry. Select the `Retailer id` from the `ID Registry` and view the updated registries.
+The transaction will change the owner of `ProductListingContract` and update the list of products in the `Retailer` registry. Select the `Retailer id` from the `ID Registry` and view the updated registries.
 
 ![Product Listing](images/retailerPL.png)
 
@@ -309,7 +311,7 @@ The transaction will the change the owner of `ProductListingContract` and update
 Please start the local Fabric using the [instructions](https://hyperledger.github.io/composer/latest/installing/development-tools#starting-and-stopping-hyperledger-fabric).
 Now change directory to the `dist` folder containing `food-supply.bna` file and type:
 
-```
+```bash
 cd dist
 composer network install --card PeerAdmin@hlfv1 --archiveFile food-supply.bna
 composer network start --networkName food-supply --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card

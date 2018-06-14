@@ -102,7 +102,7 @@ The PeerAdmin card is a special ID card used to administer the local Hyperledger
 First, clone the contents of this repo locally and cd into the project folder by running these commands:
 
 ```bash
-git clone https://github.com/IBM/BlockchainPublicRegulationFabric-Food.git
+git clone https://github.com/eciggaar/BlockchainPublicRegulationFabric-Food.git
 cd BlockchainPublicRegulationFabric-Food
 ```
 

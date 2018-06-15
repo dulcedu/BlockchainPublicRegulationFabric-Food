@@ -102,22 +102,22 @@ The PeerAdmin card is a special ID card used to administer the local Hyperledger
 First, clone the contents of this repo locally and cd into the project folder by running these commands:
 
 ```bash
+cd ~
 git clone https://github.com/eciggaar/BlockchainPublicRegulationFabric-Food.git
 cd BlockchainPublicRegulationFabric-Food
 ```
 
-Create a directory `fabric-dev-servers` and, get the .tar.gz file that contains the tools to install Hyperledger Fabric:
-
+Create a directory `fabric-dev-servers` and, get the .tar.gz file that contains the tools to install Hyperledger Fabric. 
+>You can skip this step if you are using the provided OVA image.
 ```bash
 mkdir ./fabric-dev-servers && cd ./fabric-dev-servers
 
 curl -O https://raw.githubusercontent.com/hyperledger/composer-tools/master/packages/fabric-dev-servers/fabric-dev-servers.tar.gz
 tar -xvf fabric-dev-servers.tar.gz
+./downloadFabric.sh
 ```
-
 Then, start the Fabric and create a PeerAdmin card using the following commands:
 ```bash
-./downloadFabric.sh
 ./startFabric.sh
 ./createPeerAdminCard.sh
 ```  

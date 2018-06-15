@@ -311,11 +311,10 @@ The transaction will change the owner of `ProductListingContract` and update the
 ## 5. Deploy the Business Network Archive on Hyperledger Composer running locally
 
 Please start the local Fabric using the [instructions](https://hyperledger.github.io/composer/latest/installing/development-tools#starting-and-stopping-hyperledger-fabric).
-Now change directory to the `dist` folder containing `food-supply.bna` file and type:
+Now first change directory to the project folder. Then, type:
 
 ```bash
-cd dist
-composer network install --card PeerAdmin@hlfv1 --archiveFile food-supply.bna
+composer network install --card PeerAdmin@hlfv1 --archiveFile ./dist/food-supply.bna
 composer network start --networkName food-supply --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card
 composer card import --file networkadmin.card
 ```

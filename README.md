@@ -114,6 +114,7 @@ mkdir ./fabric-dev-servers && cd ./fabric-dev-servers
 
 curl -O https://raw.githubusercontent.com/hyperledger/composer-tools/master/packages/fabric-dev-servers/fabric-dev-servers.tar.gz
 tar -xvf fabric-dev-servers.tar.gz
+
 ./downloadFabric.sh
 ```
 Then, start the Fabric and create a PeerAdmin card using the following commands:
